@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { login } from "../api/http/http";
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
 
-  const handleButtonClick = () => {
-    navigation.navigate('Test-Page')
+  const handleButtonClick = async () => {
+    await login({ email: username, password: password });
+    navigation.navigate("Test-Page");
   };
-
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Вход</Text>
       <TextInput
         style={styles.input}
-        placeholder="Username"
+        placeholder="email"
         value={username}
         onChangeText={setUsername}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        textContentType="emailAddress"
       />
       <TextInput
         style={styles.input}
@@ -39,8 +49,8 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     fontSize: 24,
@@ -48,21 +58,21 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#888',
+    borderColor: "#888",
     borderRadius: 4,
     padding: 8,
     margin: 8,
-    width: '80%',
+    width: "80%",
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#0066cc',
+    backgroundColor: "#0066cc",
     padding: 12,
     borderRadius: 4,
     marginTop: 32,
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
   },
 });
