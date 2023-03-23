@@ -8,15 +8,20 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { login } from "../api/http/http";
+import { useDispatch } from "react-redux";
+import { removeToken, stetToken } from "../store/auth/token";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleButtonClick = async () => {
-    await login({ email: username, password: password });
+    const { token } = await login({ email: username, password: password });
+    dispatch(stetToken(token));
+    dispatch(removeToken());
     navigation.navigate("Test-Page");
   };
 

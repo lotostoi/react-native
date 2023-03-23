@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./LoginScreen";
 import TestPage from "./TestPage";
+import IsAuthComponent from "../components/Auth/IsAuthComponent";
 
 const Stack = createStackNavigator();
 
@@ -15,7 +16,11 @@ const AppNavigator = () => {
       />
       <Stack.Screen
         name="Test-Page"
-        component={TestPage}
+        component={() => (
+          <IsAuthComponent>
+            <TestPage />
+          </IsAuthComponent>
+        )}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

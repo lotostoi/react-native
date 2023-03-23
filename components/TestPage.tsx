@@ -8,6 +8,12 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+
+interface Props {
+  navigation: NavigationProp<ParamListBase>;
+}
+
 const TestPage = () => {
   const navigation = useNavigation();
 

@@ -12,6 +12,7 @@ export const login = async (user: LoginData) => {
       "http://127.0.0.1:8000/api/v2/user/auth/login",
       user
     );
+    return data;
   } catch (error) {
     console.log("====================================");
     console.log(error);
